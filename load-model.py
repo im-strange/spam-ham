@@ -13,7 +13,8 @@ sample_emails = [
     "This will make you rich",
     "what are you doing",
     "get a chance to win",
-    "be a millionaire"
+    "be a millionaire",
+    "want to be a star"
 ]
 
 # report

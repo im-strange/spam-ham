@@ -1,8 +1,6 @@
 
 import csv
 import re
-import numpy as np
-import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import MultinomialNB
@@ -52,8 +50,9 @@ class SpamHam:
         predicted = self.model.predict(data)
         return predicted
 
-x = ["Do you want some money", "hello, how are you", "send gifts with this not spam"]
-
 if __name__ == "__main__":
+    x = ["Do you want some money", "hello, how are you", "send gifts with this not spam"]
+    model = SpamHam()
+    print(model.report)
     predict = model.predict(x)
     print(predict)
