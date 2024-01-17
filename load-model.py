@@ -17,7 +17,20 @@ sample_emails = [
     "want to be a star"
 ]
 
-# report
-predictions = classifier.predict(sample_emails)
+def wrap(input_str, max_length=20):
+    if len(input_str) <= max_length:
+        return input_str
+    else:
+        return input_str[:max_length] + ".."
+
+
+print("[Model Report]")
 print(classifier.report)
-for x, y in zip(sample_emails, predictions): print(f"{y:<5}{x}")
+
+print("[Model predictions]")
+predictions = classifier.predict(sample_emails)
+labels = predictions[0]
+conf = predictions[1]
+
+for i in range(len(sample_emails)):
+    print(f"{'':<3}{wrap(sample_emails[i]):<25}{labels[i]:<5}{conf[i]}")
