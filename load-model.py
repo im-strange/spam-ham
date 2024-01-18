@@ -32,6 +32,7 @@ predictions = classifier.predict(sample_emails)
 labels = predictions[0]
 conf = predictions[1]
 
-print(f"{'':<3}{'text':<20}{'class':<3}{prob}")
+print(f"{'':<3}{'text':<25}{'class':<9} prob")
+print()
 for i in range(len(sample_emails)):
     print(f"{'':<3}{wrap(sample_emails[i]):<25}{labels[i]:<5}{conf[i]}")
