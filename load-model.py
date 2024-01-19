@@ -14,7 +14,9 @@ sample_emails = [
     "what are you doing",
     "get a chance to win",
     "be a millionaire",
-    "want to be a star"
+    "want to be a star",
+    "enjoy free ads",
+    "let us have a meeting today with our supervisor"
 ]
 
 def wrap(input_str, max_length=20):
@@ -35,4 +37,4 @@ conf = predictions[1]
 print(f"{'':<3}{'text':<25}{'class':<9} prob")
 print()
 for i in range(len(sample_emails)):
-    print(f"{'':<3}{wrap(sample_emails[i]):<25}{labels[i]:<5}{conf[i]}")
+    print(f"{'':<3}{wrap(sample_emails[i]):<25}{labels[i]:<5}{list(map((lambda x: round(x, 5)), conf[i]))}")
