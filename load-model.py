@@ -31,10 +31,13 @@ print(classifier.report)
 
 print("[Model predictions]")
 predictions = classifier.predict(sample_emails)
-labels = predictions[0]
-conf = predictions[1]
+results = list(zip(sample_emails, predictions))
 
-print(f"{'':<3}{'text':<25}{'class':<9} prob")
-print()
-for i in range(len(sample_emails)):
-    print(f"{'':<3}{wrap(sample_emails[i]):<25}{labels[i]:<5}{list(map((lambda x: round(x, 5)), conf[i]))}")
+for text, result in results:
+    y = 25 if int(result[0]) not in [1,0] else 26
+    x = 12 if int(result[0]) not in [1,0] else 11
+    wrapped = wrap(text)
+    predicted_class = result[0]
+    class_prob = list(map((lambda x: round(x, 3)),result[1]))
+
+    print(f"{'':<3}{wrapped:<{y}}{predicted_class:<{x}}{class_prob}")

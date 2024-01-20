@@ -50,7 +50,7 @@ class SpamHam:
         data = self.vectorizer.transform(data)
         predicted = self.model.predict(data)
         prob = self.model.predict_proba(data)
-        return (predicted, prob)
+        return list(zip(predicted, prob))
 
 if __name__ == "__main__":
     x = ["Do you want some money", "hello, how are you", "send gifts with this not spam"]
