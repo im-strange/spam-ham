@@ -8,10 +8,7 @@ from sklearn.naive_bayes import MultinomialNB
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 
 # +=
-data1 = list(csv.reader(open("data/data-1.csv")))[1:]
-data2 = list(csv.reader(open("data/data-2.csv")))[1:]
-
-data = data2
+data = list(csv.reader(open("data.csv")))[1:]
 
 class SpamHam:
     def __init__(self, data=data, test_data=None):
@@ -61,7 +58,5 @@ class SpamHam:
         return list(zip(predicted, prob))
 
 if __name__ == "__main__":
-    x = ["Do you want some money", "hello, how are you", "send gifts with this not spam"]
-    x = list(csv.reader(open("data/data2.csv")))[1:]
-    model = SpamHam(test_data=x)
+    model = SpamHam()
     print(model.report)
