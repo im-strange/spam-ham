@@ -8,11 +8,14 @@ from sklearn.naive_bayes import MultinomialNB
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 
 # +=
-file_path = "emails.csv"
+data1 = list(csv.reader(open("data/data2.csv")))[1:]
+data2 = list(csv.reader(open("data/emails.csv")))[1:]
+
+data = data1
 
 class SpamHam:
-    def __init__(self, file=file_path):
-        self.data = list(csv.reader(open(file)))[1:]
+    def __init__(self, data=data, test_data=None):
+        self.data = data
         self.data_text = [" ".join(row[:-1]) for row in self.data]
         self.data_labels = [row[-1] for row in self.data]
 
@@ -20,16 +23,21 @@ class SpamHam:
         self.vectorizer = None
         self.model = None
 
-        self.accuracy = None
-        self.confusion_mat = None
-        self.report = None
+        if not test_data:
+            # split data into training and testing set
+            self.X_train, self.X_test, self.Y_train, self.Y_test = train_test_split(
+                self.data_text,
+                self.data_labels,
+                random_state=0
+            )
 
-        # split data into training and testing set
-        self.X_train, self.X_test, self.Y_train, self.Y_test = train_test_split(
-            self.data_text,
-            self.data_labels,
-            random_state=0
-        )
+        else:
+            self.X_train = self.data_text
+            self.Y_train = self.data_labels
+
+            self.X_test = [i[0] for i in test_data]
+            self.Y_test = [i[-1] for i in test_data]
+
         self.vectorizer = CountVectorizer()
         self.X_train = self.vectorizer.fit_transform(self.X_train)
         self.X_test = self.vectorizer.transform(self.X_test)
@@ -54,7 +62,6 @@ class SpamHam:
 
 if __name__ == "__main__":
     x = ["Do you want some money", "hello, how are you", "send gifts with this not spam"]
-    model = SpamHam()
+    x = list(csv.reader(open("data/data2.csv")))[1:]
+    model = SpamHam(test_data=x)
     print(model.report)
-    predict = model.predict(x)
-    print(predict)

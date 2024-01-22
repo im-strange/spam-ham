@@ -26,7 +26,10 @@ def wrap(input_str, max_length=20):
         return input_str[:max_length] + ".."
 
 
+
 print("[Model Report]")
+accuracy = round(classifier.accuracy, 4) * 100
+print(f"   accuracy: {accuracy}\n")
 print(classifier.report)
 
 print("[Model predictions]")
