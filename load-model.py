@@ -51,4 +51,5 @@ def display(classifier):
 
 if __name__ == "__main__":
     display(model1)
+    print()
     display(model2)
